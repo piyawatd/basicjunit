@@ -1,9 +1,12 @@
 package com.piyawat.basicjunit;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Email {
 
     public boolean checkSpaceBefore(String emailName){
-        return false;
+        return checkRegularExpressions(emailName);
     }
 
     public boolean checkSpaceAfter(String emailName){
@@ -36,5 +39,12 @@ public class Email {
 
     public boolean checkUniqueEmail(String emailName){
         return false;
+    }
+
+    private boolean checkRegularExpressions(String emailName) {
+        String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(emailName);
+        return matcher.matches();
     }
 }
